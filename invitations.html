@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --accent:#8B0000;
+  --accent-light:rgba(139,0,0,0.8);
+  --bg:#FDFAF7;
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+  --font-script:'Great Vibes',cursive;
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-serif);background:#fff;color:var(--accent);-webkit-font-smoothing:antialiased}
+
+/* Noise texture overlay */
+.section-bg::before{
+  content:'';position:absolute;inset:0;z-index:0;opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px 128px;
+}
+
+/* Section base */
+.event-section{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:4rem 2rem;position:relative;overflow:hidden;background:var(--bg);
+}
+.event-section .content{max-width:540px;width:100%;text-align:center;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.8rem}
+
+/* Section divider */
+.section-divider{width:100%;height:1px;background:var(--accent);opacity:0.3}
+
+/* Typography */
+.host-name{font-family:var(--font-serif);font-weight:600;font-size:clamp(1.1rem,3vw,1.6rem);letter-spacing:0.15em;text-transform:uppercase;color:var(--accent)}
+.invite-line{font-family:var(--font-serif);font-weight:400;font-size:clamp(0.7rem,2vw,1rem);letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-light)}
+.couple-name{font-family:var(--font-script);font-size:clamp(2rem,7vw,3.5rem);font-weight:400;color:var(--accent);line-height:1.2}
+.with-text{font-family:var(--font-serif);font-size:clamp(0.65rem,1.8vw,0.85rem);letter-spacing:0.3em;text-transform:uppercase;color:var(--accent-light)}
+.phrase{font-family:var(--font-serif);font-weight:300;font-size:clamp(0.75rem,2vw,1rem);letter-spacing:0.35em;text-transform:uppercase;color:var(--accent-light)}
+
+/* Date block */
+.date-block{display:flex;align-items:center;justify-content:center;gap:0;width:100%}
+.date-left,.date-right{flex:1;max-width:140px}
+.date-left{text-align:right;padding-right:1.2rem}
+.date-right{text-align:left;padding-left:1.2rem}
+.date-center{position:relative;padding:0 1.2rem;display:flex;align-items:center;justify-content:center}
+.date-center::before,.date-center::after{content:'';position:absolute;top:0;bottom:0;width:1px;background:var(--accent);opacity:0.4}
+.date-center::before{left:0}
+.date-center::after{right:0}
+.date-number{font-family:var(--font-serif);font-weight:300;font-size:clamp(4rem,15vw,7rem);line-height:1;color:var(--accent)}
+.date-label{font-family:var(--font-serif);font-weight:400;font-size:clamp(0.7rem,1.8vw,0.9rem);letter-spacing:0.1em;text-transform:uppercase;color:var(--accent)}
+.date-label.underlined{text-decoration:underline;text-underline-offset:3px}
+.date-value{font-family:var(--font-serif);font-weight:400;font-size:clamp(0.7rem,1.8vw,0.9rem);letter-spacing:0.1em;color:var(--accent-light);margin-top:0.3rem}
+.year-spaced{letter-spacing:0.4em}
+
+/* Venue */
+.venue-label{font-family:var(--font-serif);font-weight:600;font-size:clamp(0.75rem,2vw,0.95rem);letter-spacing:0.25em;text-decoration:underline;text-underline-offset:4px;text-transform:uppercase;color:var(--accent)}
+.venue-name{font-family:var(--font-serif);font-weight:600;font-size:clamp(0.9rem,2.5vw,1.2rem);letter-spacing:0.1em;text-transform:uppercase;color:var(--accent)}
+.mobile{font-family:var(--font-serif);font-weight:400;font-size:clamp(0.7rem,1.8vw,0.85rem);color:var(--accent-light)}
+
+/* Venue icon */
+.venue-icon{width:40px;height:40px;color:var(--accent);opacity:0.7}
+
+/* Footer */
+.footer-row{display:flex;justify-content:space-between;width:100%;margin-top:1rem;gap:1rem}
+.footer-col{flex:1;text-align:center}
+.footer-label{font-family:var(--font-serif);font-weight:600;font-size:clamp(0.65rem,1.8vw,0.85rem);letter-spacing:0.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:3px;color:var(--accent);margin-bottom:0.25rem}
+.footer-value{font-family:var(--font-serif);font-weight:400;font-size:clamp(0.65rem,1.8vw,0.85rem);letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-light)}
+
+/* Florals */
+.floral{position:absolute;z-index:0;opacity:0;pointer-events:none}
+.floral-top-right{top:-20px;right:-20px;width:280px;height:280px}
+.floral-bottom-left{bottom:-10px;left:-10px;width:200px;height:200px}
+.floral-bottom-right{bottom:-10px;right:-10px;width:200px;height:200px;transform:scaleX(-1)}
+
+/* Animations */
+.anim{opacity:0;transform:translateY(18px);transition:opacity var(--dur,700ms) var(--ease),transform var(--dur,700ms) var(--ease);transition-delay:var(--delay,0ms)}
+.anim.fade-only{transform:none}
+.anim.scale-up{transform:translateY(18px) scale(0.95)}
+.anim.visible{opacity:1;transform:translateY(0) scale(1)}
+.anim.fade-only.visible{opacity:1}
+.floral.anim{transform:scale(0.92);--dur:1200ms}
+.floral.anim.visible{opacity:var(--floral-opacity,0.3);transform:scale(1)}
+
+/* Responsive */
+@media(max-width:400px){
+  .floral{transform:scale(0.7)!important}
+  .floral.visible{transform:scale(0.75)!important}
+  .event-section{padding:2rem 1.25rem}
+  .date-left,.date-right{max-width:100px}
+  .date-left{padding-right:0.8rem}
+  .date-right{padding-left:0.8rem}
+  .date-center{padding:0 0.8rem}
+}
+@media(min-width:769px){
+  .event-section .content{max-width:640px}
+  .floral-top-right{width:340px;height:340px}
+  .floral-bottom-left,.floral-bottom-right{width:240px;height:240px}
+}
+
+/* ====== ADMIN PANEL ====== */
+.admin-panel{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);background:#fff;padding:2rem}
+.admin-card{max-width:420px;width:100%;text-align:center}
+.admin-card h1{font-size:1.5rem;font-weight:600;letter-spacing:0.1em;color:#333;margin-bottom:0.4rem}
+.admin-card p{font-size:0.85rem;color:#999;letter-spacing:0.05em;margin-bottom:2rem}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 0;border-bottom:1px solid #eee}
+.toggle-row label{font-size:1rem;font-weight:400;letter-spacing:0.1em;color:#555;cursor:pointer}
+.toggle-switch{position:relative;width:48px;height:26px;cursor:pointer}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-track{position:absolute;inset:0;background:#ddd;border-radius:13px;transition:background 0.3s}
+.toggle-switch input:checked+.toggle-track{background:#B8960C}
+.toggle-track::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform 0.3s}
+.toggle-switch input:checked+.toggle-track::after{transform:translateX(22px)}
+.admin-btn{margin-top:1.8rem;padding:0.75rem 2.5rem;font-family:var(--font-serif);font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;background:#B8960C;color:#fff;border:none;border-radius:4px;cursor:pointer;transition:background 0.3s}
+.admin-btn:hover{background:#9a7e0a}
+.admin-msg{margin-top:1rem;font-size:0.85rem;color:#B8960C;min-height:1.4em}
+.admin-msg.error{color:#c0392b}
+.admin-link-box{margin-top:1rem;width:100%;padding:0.7rem;font-family:var(--font-serif);font-size:0.78rem;border:1px solid #ddd;border-radius:4px;color:#666;background:#fafafa;word-break:break-all;text-align:left;outline:none;resize:none;min-height:2.5rem}
+</style>
+</head>
+<body>
+
+<!-- SVG Defs for reusable florals -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
+<defs>
+  <!-- Top-right floral bouquet -->
+  <g id="floral-bouquet">
+    <!-- Rose 1 -->
+    <circle cx="60" cy="60" r="18" fill="none" stroke="currentColor" stroke-width="0.8"/>
+    <path d="M60 42 Q55 50 60 55 Q65 50 60 42" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M48 52 Q55 55 58 60 Q52 58 48 52" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M72 52 Q65 55 62 60 Q68 58 72 52" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <!-- Rose 2 -->
+    <circle cx="30" cy="85" r="14" fill="none" stroke="currentColor" stroke-width="0.8"/>
+    <path d="M30 71 Q26 78 30 82 Q34 78 30 71" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M20 78 Q26 80 28 85 Q23 82 20 78" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <!-- Peony -->
+    <ellipse cx="88" cy="40" rx="20" ry="16" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <path d="M78 30 Q85 35 88 28 Q91 35 98 30" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M72 40 Q80 38 82 44 Q77 42 72 40" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M104 40 Q96 38 94 44 Q99 42 104 40" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <!-- Leaves -->
+    <path d="M45 100 Q30 120 15 140" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <path d="M30 110 Q20 105 25 95" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M25 125 Q15 118 18 108" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M100 55 Q115 70 125 95" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <path d="M110 65 Q120 58 118 50" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M118 78 Q128 70 124 62" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <!-- Stems radiating -->
+    <path d="M60 78 Q50 100 35 125" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M85 56 Q95 75 110 100" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M55 75 Q65 90 60 115" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <!-- Small buds -->
+    <circle cx="15" cy="140" r="5" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <circle cx="125" cy="95" r="6" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <circle cx="60" cy="115" r="4" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <!-- Extra leaves -->
+    <path d="M42 88 Q35 80 28 88 Q35 92 42 88Z" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M75 72 Q82 64 90 72 Q82 76 75 72Z" fill="none" stroke="currentColor" stroke-width="0.5"/>
+  </g>
+  <!-- Bottom botanical cluster -->
+  <g id="floral-botanical">
+    <!-- Stems -->
+    <path d="M80 20 Q70 40 60 70 Q55 90 50 110" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <path d="M90 15 Q85 35 90 60 Q92 80 88 100" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M70 30 Q60 50 55 80" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <!-- Berries -->
+    <circle cx="50" cy="110" r="4" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <circle cx="45" cy="100" r="3" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <circle cx="55" cy="105" r="3.5" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <circle cx="88" cy="100" r="4" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <circle cx="93" cy="92" r="3" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <!-- Leaves -->
+    <path d="M65 50 Q55 42 50 50 Q58 54 65 50Z" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M85 45 Q92 38 98 45 Q92 50 85 45Z" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M58 75 Q48 68 44 76 Q50 80 58 75Z" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M92 65 Q100 58 105 66 Q98 70 92 65Z" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <!-- Small fronds -->
+    <path d="M75 25 Q68 18 62 25" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    <path d="M95 20 Q100 12 105 20" fill="none" stroke="currentColor" stroke-width="0.4"/>
+  </g>
+  <!-- Venue icon: Marquee -->
+  <g id="icon-venue">
+    <path d="M5 35 L5 15 Q20 3 35 15 L35 35" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M5 35 L35 35" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <path d="M10 8 L10 3 M20 3 L20 0 M30 8 L30 3" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"/>
+    <path d="M15 35 L15 25 L25 25 L25 35" fill="none" stroke="currentColor" stroke-width="0.8"/>
+  </g>
+  <!-- Venue icon: Residence -->
+  <g id="icon-residence">
+    <path d="M5 22 L20 8 L35 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M8 20 L8 35 L32 35 L32 20" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    <path d="M16 35 L16 26 L24 26 L24 35" fill="none" stroke="currentColor" stroke-width="0.8"/>
+    <path d="M28 12 L28 8 L32 8 L32 16" fill="none" stroke="currentColor" stroke-width="0.8"/>
+  </g>
+</defs>
+</svg>
+
+<div id="app"></div>
+
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+
+  // ADMIN MODE
+  if(params.has('admin')){
+    renderAdmin();
+    return;
+  }
+
+  // INVITATION MODE
+  var encoded = params.get('e');
+  if(!encoded){ document.body.style.background='#fff'; return; }
+
+  var decoded;
+  try{ decoded = atob(encoded); }catch(e){ document.body.style.background='#fff'; return; }
+
+  var validCodes = ['m','b','w','mb','mw','bw','mbw'];
+  if(validCodes.indexOf(decoded) === -1){ document.body.style.background='#fff'; return; }
+
+  // Clean URL
+  history.replaceState(null,'',window.location.pathname);
+
+  var showM = decoded.indexOf('m') !== -1;
+  var showB = decoded.indexOf('b') !== -1;
+  var showW = decoded.indexOf('w') !== -1;
+
+  var events = [];
+  if(showM) events.push({
+    id:'mehndi',accent:'#8B0000',accentAlt:'#A0172A',
+    host:'Mr. & Mrs. Waheed Ahmed',event:'Mehndi Ceremony',
+    groom:'Engr. Moneeb Raza',bride:null,
+    day:'Thursday',date:'16',month:'April',year:'2026',time:'07:00 PM',
+    venueType:'Venue',venueName:'Al-Madina Marquee',city:'Karianwala',
+    mobile:'0306-6290592',
+    leftLabel:'Looking Forward',leftValue:'Waheed Garments Karianwala',
+    rightLabel:'R.S.V.P',rightValue:'All Family Members'
+  });
+  if(showB) events.push({
+    id:'barat',accent:'#B5651D',accentAlt:'#C1784A',
+    host:'Mr. & Mrs. Waheed Ahmed',event:'Wedding Ceremony',
+    groom:'Engr. Moneeb Raza',bride:'Dr. Zainab Ehsan',
+    day:'Friday',date:'17',month:'April',year:'2026',time:'01:00 PM',
+    venueType:'Residence',venueName:'Mohallah Shumali',city:'Karianwala',
+    mobile:'0306-6290592',
+    leftLabel:'Looking Forward',leftValue:'Waheed Garments Karianwala',
+    rightLabel:'R.S.V.P',rightValue:'All Family Members'
+  });
+  if(showW) events.push({
+    id:'walima',accent:'#B8960C',accentAlt:'#C9A84C',
+    host:'Mr. & Mrs. Waheed Ahmed',event:'Walima Ceremony',
+    groom:'Engr. Moneeb Raza',bride:'Dr. Zainab Ehsan',
+    day:'Saturday',date:'18',month:'April',year:'2026',time:'06:00 PM',
+    venueType:'Venue',venueName:'Al-Madina Marquee',city:'Karianwala',
+    mobile:'0306-6290592',
+    leftLabel:'Looking Forward',leftValue:'Waheed Garments Karianwala',
+    rightLabel:'R.S.V.P',rightValue:'All Family Members'
+  });
+
+  var app = document.getElementById('app');
+  events.forEach(function(ev,i){
+    if(i > 0) app.insertAdjacentHTML('beforeend','<div class="section-divider" style="background:'+ev.accent+'"></div>');
+    app.insertAdjacentHTML('beforeend', buildSection(ev));
+  });
+
+  // Animate
+  if(events.length === 1){
+    setTimeout(function(){ animateSection(document.querySelector('.event-section')); },100);
+  } else {
+    var first = document.querySelector('.event-section');
+    setTimeout(function(){ animateSection(first); },100);
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting && !en.target.dataset.animated){
+          en.target.dataset.animated='1';
+          animateSection(en.target);
+        }
+      });
+    },{threshold:0.2});
+    document.querySelectorAll('.event-section').forEach(function(s,idx){
+      if(idx > 0) obs.observe(s);
+    });
+  }
+
+  function animateSection(sec){
+    var els = sec.querySelectorAll('.anim');
+    els.forEach(function(el){
+      var d = parseInt(el.dataset.delay||'0',10);
+      setTimeout(function(){ el.classList.add('visible'); },d);
+    });
+  }
+
+  function buildSection(ev){
+    var iconId = ev.venueType === 'Residence' ? 'icon-residence' : 'icon-venue';
+    var coupleHTML = '<div class="couple-name anim scale-up" data-delay="300" style="color:'+ev.accent+'">'+ev.groom+'</div>';
+    if(ev.bride){
+      coupleHTML = '<div class="couple-name anim scale-up" data-delay="300" style="color:'+ev.accent+'">'+ev.groom+'</div>'
+        +'<div class="with-text anim fade-only" data-delay="400" style="color:'+ev.accentAlt+'">WITH</div>'
+        +'<div class="couple-name anim scale-up" data-delay="450" style="color:'+ev.accent+'">'+ev.bride+'</div>';
+    }
+    return '<section class="event-section section-bg" style="--accent:'+ev.accent+';--accent-light:'+ev.accentAlt+'">'
+      +'<svg class="floral floral-top-right anim" data-delay="200" style="color:'+ev.accent+';--floral-opacity:0.3" viewBox="0 0 140 150"><use href="#floral-bouquet"/></svg>'
+      +'<svg class="floral floral-bottom-left anim" data-delay="200" style="color:'+ev.accent+';--floral-opacity:0.25" viewBox="0 0 120 120"><use href="#floral-botanical"/></svg>'
+      +'<svg class="floral floral-bottom-right anim" data-delay="200" style="color:'+ev.accent+';--floral-opacity:0.25" viewBox="0 0 120 120"><use href="#floral-botanical"/></svg>'
+      +'<div class="content">'
+        +'<div class="host-name anim" data-delay="0" style="color:'+ev.accent+'">'+ev.host+'</div>'
+        +'<div class="invite-line anim" data-delay="150" style="color:'+ev.accentAlt+'">Cordially Invite You At The</div>'
+        +'<div class="invite-line anim" data-delay="200" style="color:'+ev.accentAlt+';margin-top:-1rem;font-weight:600;font-size:clamp(0.85rem,2.5vw,1.15rem)">'+ev.event+'</div>'
+        +coupleHTML
+        +'<div class="phrase anim fade-only" data-delay="500" style="color:'+ev.accentAlt+'">In Sha Allah</div>'
+        +'<div class="date-block anim" data-delay="650">'
+          +'<div class="date-left">'
+            +'<div class="date-label underlined" style="color:'+ev.accent+'">'+ev.day+'</div>'
+            +'<div class="date-value" style="color:'+ev.accentAlt+'">'+ev.time+'</div>'
+          +'</div>'
+          +'<div class="date-center" style="--accent:'+ev.accent+'">'
+            +'<div class="date-number" style="color:'+ev.accent+'">'+ev.date+'</div>'
+          +'</div>'
+          +'<div class="date-right">'
+            +'<div class="date-label underlined" style="color:'+ev.accent+'">'+ev.month+'</div>'
+            +'<div class="date-value year-spaced" style="color:'+ev.accentAlt+'">2 0 2 6</div>'
+          +'</div>'
+        +'</div>'
+        +'<div class="anim fade-only" data-delay="800" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem">'
+          +'<svg class="venue-icon" style="color:'+ev.accent+'" viewBox="0 0 40 40"><use href="#'+iconId+'"/></svg>'
+          +'<div class="venue-label" style="color:'+ev.accent+'">'+ev.venueType+'</div>'
+        +'</div>'
+        +'<div class="anim" data-delay="900" style="display:flex;flex-direction:column;align-items:center;gap:0.3rem">'
+          +'<div class="venue-name" style="color:'+ev.accent+'">'+ev.venueName+'</div>'
+          +'<div class="venue-name" style="color:'+ev.accent+';font-size:clamp(0.8rem,2.2vw,1.05rem)">'+ev.city+'</div>'
+          +'<div class="mobile" style="color:'+ev.accentAlt+'">'+ev.mobile+'</div>'
+        +'</div>'
+        +'<div class="footer-row anim" data-delay="1100">'
+          +'<div class="footer-col">'
+            +'<div class="footer-label" style="color:'+ev.accent+'">'+ev.leftLabel+'</div>'
+            +'<div class="footer-value" style="color:'+ev.accentAlt+'">'+ev.leftValue+'</div>'
+          +'</div>'
+          +'<div class="footer-col">'
+            +'<div class="footer-label" style="color:'+ev.accent+'">'+ev.rightLabel+'</div>'
+            +'<div class="footer-value" style="color:'+ev.accentAlt+'">'+ev.rightValue+'</div>'
+          +'</div>'
+        +'</div>'
+      +'</div>'
+    +'</section>';
+  }
+
+  // ADMIN PANEL
+  function renderAdmin(){
+    document.getElementById('app').innerHTML =
+      '<div class="admin-panel">'
+      +'<div class="admin-card">'
+        +'<h1>Invitation Link Generator</h1>'
+        +'<p>Select events to include in the invitation</p>'
+        +toggleRow('Mehndi','chk-m')
+        +toggleRow('Barat','chk-b')
+        +toggleRow('Walima','chk-w')
+        +'<button class="admin-btn" id="gen-btn">Generate Link</button>'
+        +'<div class="admin-msg" id="admin-msg"></div>'
+        +'<textarea class="admin-link-box" id="admin-link" readonly style="display:none"></textarea>'
+      +'</div>'
+      +'</div>';
+
+    document.getElementById('gen-btn').addEventListener('click',function(){
+      var m=document.getElementById('chk-m').checked;
+      var b=document.getElementById('chk-b').checked;
+      var w=document.getElementById('chk-w').checked;
+      var msg=document.getElementById('admin-msg');
+      var box=document.getElementById('admin-link');
+      if(!m&&!b&&!w){msg.textContent='Please select at least one event';msg.className='admin-msg error';box.style.display='none';return;}
+      var code='';
+      if(m)code+='m';if(b)code+='b';if(w)code+='w';
+      var encoded=btoa(code);
+      var base=window.location.origin+window.location.pathname.replace(/\?.*$/,'');
+      var url=base+'?e='+encoded;
+      box.value=url;box.style.display='block';
+      navigator.clipboard.writeText(url).then(function(){
+        msg.textContent='Link copied to clipboard ✓';msg.className='admin-msg';
+      }).catch(function(){
+        msg.textContent='Link generated — copy manually below';msg.className='admin-msg';
+      });
+    });
+  }
+
+  function toggleRow(label,id){
+    return '<div class="toggle-row">'
+      +'<label for="'+id+'">'+label+'</label>'
+      +'<label class="toggle-switch"><input type="checkbox" id="'+id+'"><span class="toggle-track"></span></label>'
+      +'</div>';
+  }
+})();
+</script>
+</body>
+</html>
