@@ -6,8 +6,11 @@ async function getInvitationHtml() {
 
   try {
     return await fs.readFile(invitationHtmlPath, "utf8");
-  } catch {
-    throw new Error("Could not load invitation.html from the project root.");
+  } catch (error) {
+    throw new Error(
+      `Could not load invitation.html from ${invitationHtmlPath}.`,
+      { cause: error }
+    );
   }
 }
 
