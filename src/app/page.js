@@ -1,10 +1,19 @@
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import path from "node:path";
 
-const invitationHtmlPath = path.join(process.cwd(), "invitation.html");
-const invitationHtml = fs.readFileSync(invitationHtmlPath, "utf8");
+async function getInvitationHtml() {
+  const invitationHtmlPath = path.join(process.cwd(), "invitation.html");
 
-export default function Home() {
+  try {
+    return await fs.readFile(invitationHtmlPath, "utf8");
+  } catch {
+    throw new Error("Could not load invitation.html from the project root.");
+  }
+}
+
+export default async function Home() {
+  const invitationHtml = await getInvitationHtml();
+
   return (
     <main className="h-screen w-screen">
       <iframe
