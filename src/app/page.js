@@ -7,7 +7,7 @@ async function getInvitationHtml() {
   try {
     return await fs.readFile(invitationHtmlPath, "utf8");
   } catch (error) {
-    const errorCode = error && typeof error === "object" ? error.code : "UNKNOWN";
+    const errorCode = error?.code ?? "UNKNOWN";
     throw new Error(
       `Could not load invitation.html from ${invitationHtmlPath} (error: ${errorCode}).`,
       { cause: error }
