@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export default function Home() {
-  const invitationHtmlPath = path.join(process.cwd(), "invitation.html");
-  const invitationHtml = fs.readFileSync(invitationHtmlPath, "utf8");
+const invitationHtmlPath = path.join(process.cwd(), "invitation.html");
+const invitationHtml = fs.readFileSync(invitationHtmlPath, "utf8");
 
+export default function Home() {
   return (
     <main className="h-screen w-screen">
       <iframe
