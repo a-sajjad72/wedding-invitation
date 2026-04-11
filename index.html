@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wedding Invitation</title>
+
+<!-- Primary Meta -->
+<meta name="description" content="Mr. & Mrs. Waheed Ahmed cordially invite you to the wedding celebrations of Engr. Moneeb Raza & Dr. Zainab Ehsan — Mehndi, Barat & Walima, April 2026, Karianwala." />
+<!-- Open Graph (Facebook, WhatsApp, Telegram, LinkedIn) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Wedding Invitation — Engr. Moneeb Raza & Dr. Zainab Ehsan" />
+<meta property="og:description" content="Mr. & Mrs. Waheed Ahmed cordially invite you to the wedding celebrations. Mehndi · Barat · Walima — 16, 17 & 18 April 2026, Karianwala." />
+<meta property="og:image" content="" id="og-image-meta" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_PK" />
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Wedding Invitation — Engr. Moneeb Raza & Dr. Zainab Ehsan" />
+<meta name="twitter:description" content="Mr. & Mrs. Waheed Ahmed cordially invite you. Mehndi · Barat · Walima — 16, 17 & 18 April 2026, Karianwala." />
+<meta name="twitter:image" content="" id="twitter-image-meta" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -122,9 +139,115 @@ body{font-family:var(--font-serif);background:#fff;color:var(--accent);-webkit-f
 .admin-msg{margin-top:1rem;font-size:0.85rem;color:#B8960C;min-height:1.4em}
 .admin-msg.error{color:#c0392b}
 .admin-link-box{margin-top:1rem;width:100%;padding:0.7rem;font-family:var(--font-serif);font-size:0.78rem;border:1px solid #ddd;border-radius:4px;color:#666;background:#fafafa;word-break:break-all;text-align:left;outline:none;resize:none;min-height:2.5rem}
+
+/* ====== ENVELOPE SCREEN ====== */
+#envelope-screen{
+  position:fixed;inset:0;z-index:1000;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+#envelope-screen::before{
+  content:'';position:absolute;inset:0;z-index:0;opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px 128px;pointer-events:none;
+}
+.env-floral{position:absolute;pointer-events:none;z-index:0;color:#B5651D}
+.env-floral-tr{top:-20px;right:-20px;width:min(340px,52vw);height:auto;opacity:0.30}
+.env-floral-bl{bottom:-10px;left:-10px;width:min(220px,38vw);height:auto;opacity:0.30}
+
+/* Envelope widget */
+#envelope-widget{
+  position:relative;z-index:10;
+  width:clamp(280px,78vw,420px);
+  perspective:1200px;
+  transform-style:preserve-3d;
+  opacity:0;transform:translateY(28px) scale(0.96);
+}
+#env-body{
+  width:100%;padding-bottom:72%;position:relative;border-radius:3px;
+  background:#FFF8F0;overflow:hidden;
+  box-shadow:0 8px 40px rgba(139,69,19,0.18),0 2px 12px rgba(0,0,0,0.10),inset 0 0 0 1px rgba(181,101,29,0.15);
+}
+/* Horizontal crease at flap junction */
+#env-body::after{
+  content:'';position:absolute;top:52%;left:0;right:0;height:1px;
+  background:rgba(181,101,29,0.18);z-index:5;pointer-events:none;
+}
+.env-fold-line{position:absolute;width:141.4%;height:1px;background:rgba(181,101,29,0.08);top:50%;left:50%;transform-origin:center}
+.env-fold-line-1{transform:translate(-50%,-50%) rotate(33deg)}
+.env-fold-line-2{transform:translate(-50%,-50%) rotate(-33deg)}
+.env-bottom-fold{position:absolute;bottom:0;left:0;width:100%;height:55%;clip-path:polygon(0% 100%,50% 30%,100% 100%);background:#F5ECD8;border-top:1px solid rgba(181,101,29,0.12)}
+.env-left-fold{position:absolute;left:0;top:0;width:50%;height:100%;clip-path:polygon(0% 0%,0% 100%,42% 50%);background:#F8F1E4}
+.env-right-fold{position:absolute;right:0;top:0;width:50%;height:100%;clip-path:polygon(100% 0%,100% 100%,58% 50%);background:#F3EAD8}
+#card-peek{
+  position:absolute;bottom:10%;left:10%;width:80%;height:75%;
+  background:linear-gradient(180deg,#FFFFFF 0%,#FDF8F3 100%);
+  border-radius:2px;box-shadow:0 -2px 20px rgba(0,0,0,0.12);
+  transform:translateY(100%);opacity:0;z-index:1;
+}
+#env-flap{
+  position:absolute;top:0;left:0;width:100%;height:52%;z-index:20;
+  transform-origin:top center;transform:rotateX(0deg);
+  transition:transform 0.72s cubic-bezier(0.76,0,0.24,1);
+  background:linear-gradient(175deg,#FFF6EC 0%,#F5E3C4 55%,#E8D0A0 100%);
+  border-top:1px solid rgba(181,101,29,0.14);
+  border-left:1px solid rgba(181,101,29,0.14);
+  border-right:1px solid rgba(181,101,29,0.14);
+  box-shadow:0 6px 20px rgba(139,69,19,0.14);
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  overflow:hidden;
+}
+/* V-fold crease drawn as SVG INSIDE flap — no clip-path on parent */
+#env-flap .flap-v-svg{
+  position:absolute;bottom:0;left:0;width:100%;height:100%;
+  pointer-events:none;
+}
+#env-flap.open{box-shadow:none;}
+/* Seal */
+#env-seal{
+  position:absolute;z-index:30;cursor:pointer;
+  top:calc(52% - clamp(38px,11vw,58px));left:50%;transform:translateX(-50%);
+}
+.seal-outer-ring{
+  width:clamp(70px,18vw,110px);height:clamp(70px,18vw,110px);
+  border-radius:50%;border:1px solid rgba(181,101,29,0.35);padding:5px;
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.seal-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 36% 32%,#D4956A 0%,#B5651D 30%,#8B4513 65%,#5C2D0E 100%);
+  box-shadow:inset 0 -5px 15px rgba(0,0,0,0.35),inset 0 4px 10px rgba(255,210,160,0.22),0 5px 20px rgba(139,69,19,0.50),0 2px 6px rgba(0,0,0,0.25);
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.seal-monogram{
+  font-family:var(--font-script);font-size:clamp(1.4rem,4.5vw,2.2rem);
+  color:rgba(255,245,228,0.88);text-shadow:0 1px 4px rgba(0,0,0,0.45);
+  user-select:none;position:relative;z-index:2;
+}
+.seal-tick-ring{position:absolute;inset:-6px;pointer-events:none}
+#seal-crack{position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:0;z-index:3}
+@keyframes seal-pulse-new{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.05)}}
+.seal-pulsing-new{animation:seal-pulse-new 2.6s ease-in-out infinite}
+@keyframes seal-pop{0%{transform:translateX(-50%) scale(1)}30%{transform:translateX(-50%) scale(1.10)}100%{transform:translateX(-50%) scale(0.94)}}
+/* Text below envelope */
+.env-below-text{position:relative;z-index:10;margin-top:2rem;text-align:center;opacity:0;transform:translateY(14px)}
+.env-invite-line{
+  font-family:var(--font-serif);font-weight:300;font-style:italic;
+  font-size:clamp(0.95rem,2.8vw,1.25rem);color:#B5651D;
+}
+.env-tap-line{
+  font-family:var(--font-serif);font-weight:300;font-size:clamp(0.58rem,1.6vw,0.72rem);
+  letter-spacing:0.38em;text-transform:uppercase;color:rgba(181,101,29,0.50);margin-top:0.5rem;
+}
+@keyframes tap-breathe-new{0%,100%{opacity:0.5}50%{opacity:0.2}}
+.tap-breathing-new{animation:tap-breathe-new 2.4s ease-in-out infinite}
 </style>
 </head>
 <body>
+
+<!-- Hidden canvas for OG thumbnail -->
+<canvas id="og-canvas" width="1200" height="630" style="display:none;position:absolute"></canvas>
 
 <!-- SVG Defs for reusable florals -->
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -199,18 +322,379 @@ body{font-family:var(--font-serif);background:#fff;color:var(--accent);-webkit-f
     <path d="M16 35 L16 26 L24 26 L24 35" fill="none" stroke="currentColor" stroke-width="0.8"/>
     <path d="M28 12 L28 8 L32 8 L32 16" fill="none" stroke="currentColor" stroke-width="0.8"/>
   </g>
+  <!-- Mini floral motifs for envelope -->
+  <g id="mini-rose">
+    <circle cx="15" cy="15" r="8" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <path d="M15 7 Q12 12 15 14 Q18 12 15 7" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M9 11 Q13 13 14 16 Q11 14 9 11" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M21 11 Q17 13 16 16 Q19 14 21 11" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M15 23 L15 30" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M13 26 Q10 23 8 25" fill="none" stroke="currentColor" stroke-width="0.4"/>
+  </g>
+  <g id="mini-leaf-pair">
+    <path d="M15 5 Q8 15 15 25 Q22 15 15 5Z" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M15 5 L15 30" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    <path d="M22 10 Q28 18 22 26 Q16 18 22 10Z" fill="none" stroke="currentColor" stroke-width="0.5" transform="translate(5,2)"/>
+  </g>
+  <g id="mini-berry">
+    <circle cx="10" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <circle cx="18" cy="8" r="2.5" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <circle cx="14" cy="16" r="2.8" fill="none" stroke="currentColor" stroke-width="0.7"/>
+    <path d="M13 6 Q14 0 16 4" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    <path d="M10 7 Q8 2 12 3" fill="none" stroke="currentColor" stroke-width="0.4"/>
+  </g>
+  <g id="mini-peony">
+    <ellipse cx="15" cy="13" rx="10" ry="8" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M8 7 Q12 10 15 6 Q18 10 22 7" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    <path d="M15 21 L15 30" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M13 24 Q9 22 8 24" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    <path d="M17 25 Q21 23 22 25" fill="none" stroke="currentColor" stroke-width="0.4"/>
+  </g>
+  <g id="mini-leaf-sprig">
+    <path d="M15 2 L15 30" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M15 8 Q8 5 6 10" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M15 14 Q22 11 24 16" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M15 20 Q8 17 6 22" fill="none" stroke="currentColor" stroke-width="0.5"/>
+  </g>
+  <g id="mini-rosebud">
+    <path d="M15 8 Q12 14 15 18 Q18 14 15 8" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <path d="M11 12 Q13 15 15 14" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    <path d="M19 12 Q17 15 15 14" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    <path d="M15 18 L15 28" fill="none" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M12 10 Q10 7 12 5" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    <path d="M18 10 Q20 7 18 5" fill="none" stroke="currentColor" stroke-width="0.4"/>
+  </g>
+  <g id="mini-tiny-berry">
+    <circle cx="8" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <circle cx="14" cy="9" r="2" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <circle cx="11" cy="16" r="1.8" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    <circle cx="17" cy="14" r="1.5" fill="none" stroke="currentColor" stroke-width="0.6"/>
+  </g>
 </defs>
 </svg>
 
-<div id="app"></div>
+<div id="app" style="opacity:0"></div>
 
 <script>
 (function(){
+  // ===== OG THUMBNAIL GENERATION =====
+  function generateOGThumbnail(){
+    try{
+      var c=document.getElementById('og-canvas');
+      if(!c)return;
+      var ctx=c.getContext('2d');
+      // Background
+      ctx.fillStyle='#FDFAF7';
+      ctx.fillRect(0,0,1200,630);
+      // Subtle texture
+      ctx.globalAlpha=0.018;
+      for(var ty=0;ty<630;ty+=3){
+        for(var tx=0;tx<1200;tx+=3){
+          if(Math.random()>0.5){
+            ctx.fillStyle=Math.random()>0.5?'#d0c8b8':'#e8e0d4';
+            ctx.fillRect(tx,ty,2,2);
+          }
+        }
+      }
+      ctx.globalAlpha=1;
+
+      // Top-right floral
+      ctx.save();
+      ctx.globalAlpha=0.32;
+      ctx.strokeStyle='#B5651D';
+      ctx.lineWidth=1.6;
+      // Rose
+      ctx.beginPath();ctx.arc(1080,80,30,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(1080,50);ctx.bezierCurveTo(1070,65,1075,75,1080,80);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(1080,50);ctx.bezierCurveTo(1090,65,1085,75,1080,80);ctx.stroke();
+      // Peony
+      ctx.beginPath();ctx.ellipse(1140,50,28,22,0,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(1120,35);ctx.bezierCurveTo(1130,42,1135,30,1140,35);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(1160,35);ctx.bezierCurveTo(1150,42,1145,30,1140,35);ctx.stroke();
+      // Leaves
+      ctx.beginPath();ctx.moveTo(1050,100);ctx.bezierCurveTo(1020,140,1000,170,980,200);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(1030,130);ctx.bezierCurveTo(1015,120,1020,105,1030,110);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(1150,75);ctx.bezierCurveTo(1170,100,1180,140,1185,180);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(1165,110);ctx.bezierCurveTo(1180,100,1175,85,1165,95);ctx.stroke();
+      // Stems
+      ctx.beginPath();ctx.moveTo(1100,95);ctx.bezierCurveTo(1080,130,1060,170,1040,200);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(1120,70);ctx.bezierCurveTo(1140,110,1155,150,1160,190);ctx.stroke();
+      // Small buds
+      ctx.beginPath();ctx.arc(980,200,8,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.arc(1185,180,7,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.arc(1040,200,5,0,Math.PI*2);ctx.stroke();
+      // Rose 2
+      ctx.beginPath();ctx.arc(1020,110,18,0,Math.PI*2);ctx.stroke();
+      ctx.restore();
+
+      // Bottom-left floral
+      ctx.save();
+      ctx.globalAlpha=0.32;
+      ctx.strokeStyle='#B5651D';
+      ctx.lineWidth=1.6;
+      ctx.beginPath();ctx.moveTo(100,430);ctx.bezierCurveTo(80,470,65,510,55,560);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(130,440);ctx.bezierCurveTo(120,480,115,520,110,570);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(70,460);ctx.bezierCurveTo(50,500,40,540,35,580);ctx.stroke();
+      // Berries
+      ctx.beginPath();ctx.arc(55,560,6,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.arc(45,545,5,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.arc(65,550,5.5,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();ctx.arc(110,570,6,0,Math.PI*2);ctx.stroke();
+      // Leaves
+      ctx.beginPath();ctx.moveTo(80,480);ctx.bezierCurveTo(65,470,60,480,72,488);ctx.closePath();ctx.stroke();
+      ctx.beginPath();ctx.moveTo(120,470);ctx.bezierCurveTo(135,460,140,470,128,478);ctx.closePath();ctx.stroke();
+      ctx.restore();
+
+      // Thin horizontal rules
+      ctx.save();
+      ctx.strokeStyle='rgba(181,101,29,0.2)';
+      ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(80,170);ctx.lineTo(1120,170);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(80,460);ctx.lineTo(1120,460);ctx.stroke();
+      ctx.restore();
+
+      // Helper: draw spaced text centered
+      function drawSpaced(text,x,y,spacing){
+        var chars=text.split('');
+        var totalW=0;
+        chars.forEach(function(ch){totalW+=ctx.measureText(ch).width+spacing;});
+        totalW-=spacing;
+        var cx=x-totalW/2;
+        chars.forEach(function(ch){
+          ctx.fillText(ch,cx,y);
+          cx+=ctx.measureText(ch).width+spacing;
+        });
+      }
+
+      // Text
+      ctx.textAlign='center';ctx.textBaseline='middle';
+
+      // Host name
+      ctx.fillStyle='#B5651D';
+      ctx.font="600 28px 'Cormorant Garamond',serif";
+      drawSpaced('MR. & MRS. WAHEED AHMED',600,110,3.5);
+
+      // Invite line
+      ctx.save();
+      ctx.globalAlpha=0.75;
+      ctx.font="300 15px 'Cormorant Garamond',serif";
+      drawSpaced('CORDIALLY INVITE YOU TO THE WEDDING CELEBRATIONS OF',600,155,2.5);
+      ctx.restore();
+
+      // Groom name
+      ctx.fillStyle='#B5651D';
+      ctx.font="italic 58px 'Great Vibes',cursive";
+      ctx.fillText('Engr. Moneeb Raza',600,255);
+
+      // WITH
+      ctx.save();
+      ctx.globalAlpha=0.65;
+      ctx.font="300 13px 'Cormorant Garamond',serif";
+      drawSpaced('WITH',600,295,4);
+      ctx.restore();
+
+      // Bride name
+      ctx.fillStyle='#B5651D';
+      ctx.font="italic 58px 'Great Vibes',cursive";
+      ctx.fillText('Dr. Zainab Ehsan',600,355);
+
+      // Events line
+      ctx.save();
+      ctx.globalAlpha=0.8;
+      ctx.fillStyle='#8B0000';
+      ctx.font="400 17px 'Cormorant Garamond',serif";
+      drawSpaced('MEHNDI  ·  BARAT  ·  WALIMA',600,418,2.8);
+      ctx.restore();
+
+      // Date
+      ctx.fillStyle='#B5651D';
+      ctx.font="300 20px 'Cormorant Garamond',serif";
+      drawSpaced('16 · 17 · 18  APRIL  2026',600,500,3);
+
+      // Venue
+      ctx.save();
+      ctx.globalAlpha=0.65;
+      ctx.font="400 14px 'Cormorant Garamond',serif";
+      drawSpaced('AL-MADINA MARQUEE, KARIANWALA',600,545,2);
+      ctx.restore();
+
+      // Set meta tags
+      var dataUrl=c.toDataURL('image/png');
+      var ogMeta=document.getElementById('og-image-meta');
+      var twMeta=document.getElementById('twitter-image-meta');
+      if(ogMeta)ogMeta.setAttribute('content',dataUrl);
+      if(twMeta)twMeta.setAttribute('content',dataUrl);
+      // Remove canvas
+      c.parentNode.removeChild(c);
+    }catch(e){
+      // Fail silently
+      try{var cc=document.getElementById('og-canvas');if(cc)cc.parentNode.removeChild(cc);}catch(x){}
+    }
+  }
+
+  // ===== ENVELOPE SCREEN =====
+  function buildSealTicks(){
+    var svg='';
+    for(var i=0;i<12;i++){
+      var angle=(i*30)*Math.PI/180;
+      var x1=50+Math.cos(angle)*42;var y1=50+Math.sin(angle)*42;
+      var x2=50+Math.cos(angle)*47;var y2=50+Math.sin(angle)*47;
+      svg+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="rgba(255,220,170,0.40)" stroke-width="0.8"/>';
+    }
+    [0,90,180,270].forEach(function(deg){
+      var a=deg*Math.PI/180;var cx=50+Math.cos(a)*45;var cy=50+Math.sin(a)*45;
+      svg+='<polygon points="'+(cx)+','+(cy-2)+' '+(cx+1.5)+','+(cy)+' '+(cx)+','+(cy+2)+' '+(cx-1.5)+','+(cy)+'" fill="rgba(255,220,170,0.40)"/>';
+    });
+    return svg;
+  }
+
+  function createEnvelopeScreen(onOpen){
+    var env=document.createElement('div');
+    env.id='envelope-screen';
+
+    // Corner florals + envelope widget + text below
+    env.innerHTML=
+      '<svg class="env-floral env-floral-tr" viewBox="0 0 140 150"><use href="#floral-bouquet"/></svg>'
+     +'<svg class="env-floral env-floral-bl" viewBox="0 0 120 120"><use href="#floral-botanical"/></svg>'
+     +'<div id="envelope-widget">'
+       +'<div id="env-body">'
+         +'<div class="env-fold-line env-fold-line-1"></div>'
+         +'<div class="env-fold-line env-fold-line-2"></div>'
+         +'<div class="env-bottom-fold"></div>'
+         +'<div class="env-left-fold"></div>'
+         +'<div class="env-right-fold"></div>'
+         +'<div id="card-peek"></div>'
+       +'</div>'
+       +'<div id="env-flap">'
+         /* V-fold crease line — purely decorative, inside the rectangle, no clip-path */
+         +'<svg class="flap-v-svg" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">'
+           +'<path d="M0 100 L50 55 L100 100" fill="rgba(245,230,200,0.6)" stroke="rgba(181,101,29,0.22)" stroke-width="0.4"/>'
+         +'</svg>'
+       +'</div>'
+       +'<div id="env-seal">'
+         +'<div class="seal-outer-ring">'
+           +'<svg class="seal-tick-ring" viewBox="0 0 100 100">'
+             +'<circle cx="50" cy="50" r="47" fill="none" stroke="rgba(255,220,170,0.40)" stroke-width="0.8"/>'
+             +buildSealTicks()
+           +'</svg>'
+           +'<div class="seal-inner">'
+             +'<div class="seal-monogram">W\u00B7A</div>'
+             +'<svg id="seal-crack" viewBox="0 0 100 100">'
+               +'<path d="M50 50 Q45 35 38 12" stroke="#2a0f00" stroke-width="1" fill="none" opacity="0.7"/>'
+               +'<path d="M50 50 Q60 30 72 15" stroke="#2a0f00" stroke-width="1" fill="none" opacity="0.7"/>'
+               +'<path d="M50 50 Q38 48 12 55" stroke="#2a0f00" stroke-width="1" fill="none" opacity="0.7"/>'
+               +'<path d="M50 50 Q62 52 88 58" stroke="#2a0f00" stroke-width="1" fill="none" opacity="0.7"/>'
+               +'<path d="M50 50 Q42 65 30 88" stroke="#2a0f00" stroke-width="1" fill="none" opacity="0.7"/>'
+               +'<path d="M50 50 Q58 68 68 90" stroke="#2a0f00" stroke-width="1" fill="none" opacity="0.7"/>'
+             +'</svg>'
+           +'</div>'
+         +'</div>'
+       +'</div>'
+     +'</div>'
+     +'<div class="env-below-text" id="env-below">'
+       +'<div class="env-invite-line">You have been cordially invited</div>'
+       +'<div class="env-tap-line" id="env-tap">Tap the seal to open</div>'
+     +'</div>';
+
+    document.body.insertBefore(env,document.body.firstChild);
+
+    var widget=document.getElementById('envelope-widget');
+    var belowText=document.getElementById('env-below');
+    var seal=document.getElementById('env-seal');
+    var tapT=document.getElementById('env-tap');
+
+    // Entry animation
+    setTimeout(function(){
+      widget.style.transition='opacity 900ms var(--ease),transform 900ms var(--ease)';
+      widget.style.opacity='1';widget.style.transform='translateY(0) scale(1)';
+    },350);
+    setTimeout(function(){
+      belowText.style.transition='opacity 700ms var(--ease),transform 700ms var(--ease)';
+      belowText.style.opacity='1';belowText.style.transform='translateY(0)';
+    },1000);
+    // Start pulse + breathing after entry
+    setTimeout(function(){
+      seal.classList.add('seal-pulsing-new');
+      tapT.classList.add('tap-breathing-new');
+    },1600);
+
+    // Click handler
+    var tapped=false;
+    seal.addEventListener('click',function openEnvelope(){
+      if(tapped)return;
+      tapped=true;
+      seal.classList.remove('seal-pulsing-new');
+      tapT.classList.remove('tap-breathing-new');
+
+      // Step 1 (t=0): seal pop + crack
+      seal.style.animation='seal-pop 160ms ease-out forwards';
+      document.getElementById('seal-crack').style.opacity='1';
+
+      // Step 2 (t=160): seal fade out
+      setTimeout(function(){
+        seal.style.transition='opacity 280ms ease-in,transform 280ms ease-in';
+        seal.style.opacity='0';
+        seal.style.transform='translateX(-50%) scale(0.80)';
+      },160);
+
+      // Step 3 (t=220): flap opens — rotateX on rectangle, no clip-path conflict
+      setTimeout(function(){
+        var flap=document.getElementById('env-flap');
+        flap.classList.add('open');
+        flap.style.transformOrigin='top center';
+        flap.style.transform='rotateX(-178deg)';
+      },220);
+
+      // Remove overflow on body so card can peek (t=480)
+      setTimeout(function(){
+        document.getElementById('env-body').style.overflow='visible';
+      },480);
+
+      // Step 4 (t=500): card peeks out
+      setTimeout(function(){
+        var card=document.getElementById('card-peek');
+        card.style.transition='transform 500ms var(--ease),opacity 500ms var(--ease)';
+        card.style.transform='translateY(-22%)';
+        card.style.opacity='1';
+      },500);
+
+      // Also fade out below text
+      setTimeout(function(){
+        belowText.style.transition='opacity 300ms ease-in';
+        belowText.style.opacity='0';
+      },400);
+
+      // Step 5 (t=900): entire screen fades
+      setTimeout(function(){
+        env.style.transition='opacity 450ms ease-in,transform 450ms ease-in';
+        env.style.opacity='0';
+        env.style.transform='scale(1.03)';
+      },900);
+
+      // Step 6 (t=1000): app fades in
+      setTimeout(function(){
+        var appEl=document.getElementById('app');
+        appEl.style.transition='opacity 400ms ease-out';
+        appEl.style.opacity='1';
+      },1000);
+
+      // Step 7 (t=1350): cleanup + trigger animations
+      setTimeout(function(){
+        env.parentNode.removeChild(env);
+        onOpen();
+      },1350);
+    });
+  }
+
+  // ===== MAIN INIT =====
   var params = new URLSearchParams(window.location.search);
 
   // ADMIN MODE
   if(params.has('admin')){
+    document.getElementById('app').style.opacity='1';
     renderAdmin();
+    // Generate OG thumbnail after fonts load
+    document.fonts.ready.then(generateOGThumbnail).catch(function(){});
     return;
   }
 
@@ -269,23 +753,37 @@ body{font-family:var(--font-serif);background:#fff;color:var(--accent);-webkit-f
     app.insertAdjacentHTML('beforeend', buildSection(ev));
   });
 
-  // Animate
-  if(events.length === 1){
-    setTimeout(function(){ animateSection(document.querySelector('.event-section')); },100);
-  } else {
-    var first = document.querySelector('.event-section');
-    setTimeout(function(){ animateSection(first); },100);
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting && !en.target.dataset.animated){
-          en.target.dataset.animated='1';
-          animateSection(en.target);
-        }
-      });
-    },{threshold:0.2});
-    document.querySelectorAll('.event-section').forEach(function(s,idx){
-      if(idx > 0) obs.observe(s);
+  // Generate OG thumbnail after fonts, then show envelope
+  document.fonts.ready.then(function(){
+    generateOGThumbnail();
+    createEnvelopeScreen(function(){
+      setupAnimations();
     });
+  }).catch(function(){
+    generateOGThumbnail();
+    createEnvelopeScreen(function(){
+      setupAnimations();
+    });
+  });
+
+  function setupAnimations(){
+    if(events.length === 1){
+      setTimeout(function(){ animateSection(document.querySelector('.event-section')); },100);
+    } else {
+      var first = document.querySelector('.event-section');
+      setTimeout(function(){ animateSection(first); },100);
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting && !en.target.dataset.animated){
+            en.target.dataset.animated='1';
+            animateSection(en.target);
+          }
+        });
+      },{threshold:0.2});
+      document.querySelectorAll('.event-section').forEach(function(s,idx){
+        if(idx > 0) obs.observe(s);
+      });
+    }
   }
 
   function animateSection(sec){
